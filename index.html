@@ -1,0 +1,213 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<title>Taskify</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  display:flex;
+  height:100vh;
+  background:url('opening page.jpg');
+  background-size:cover;
+}
+
+/* CENTER TITLE */
+.center-title{
+  position:absolute;
+  top:110px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:48px;
+  font-weight:bold;
+  color:orange;
+}
+
+/* LEFT */
+.left{
+  width:45%;
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  padding-right:40px;
+}
+
+/* RIGHT */
+.right{
+  width:45%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  padding-left:40px;
+}
+
+/* LOGIN BOX */
+.login-box{
+  background:transparent;
+  padding:40px;
+  width:320px;
+  text-align:left;
+}
+
+/* TITLE */
+.login-box h1{
+  display:none;
+}
+
+.login-box h2{
+  text-align:center;
+  margin-bottom:20px;
+  color:black;
+}
+
+/* INPUT + BUTTON */
+input, button{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border-radius:6px;
+  box-sizing:border-box;
+}
+
+input{
+  border:1px solid #ccc;
+}
+
+/* CHECKBOX */
+.checkbox-row{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:4px;
+  margin:5px 0 15px 0;
+}
+
+.checkbox-row input{
+  margin:0;
+  width:auto;
+}
+
+/* BUTTON */
+button{
+  background:orange;
+  color:white;
+  border:none;
+  cursor:pointer;
+}
+
+button:hover{
+  background:darkorange;
+}
+
+/* MESSAGE */
+.msg{
+  margin-top:10px;
+  font-size:14px;
+}
+
+/* FEATURES */
+.feature{
+  background:white;
+  padding:15px 40px;
+  margin:12px 0;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.right h2{
+  color:black;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- CENTER TASKIFY -->
+<div class="center-title">Taskify</div>
+
+<!-- LEFT -->
+<div class="left">
+  <div class="login-box">
+    <h1>Taskify</h1>
+    <h2>Login</h2>
+
+    <input type="text" id="user" placeholder="Username">
+    <input type="password" id="pass" placeholder="Password">
+
+    <div class="checkbox-row">
+      <input type="checkbox" onclick="togglePassword()">
+      <span>Show Password</span>
+    </div>
+
+    <button onclick="login()">Login</button>
+    <button onclick="register()">Register</button>
+
+    <div class="msg" id="msg"></div>
+  </div>
+</div>
+
+<!-- RIGHT -->
+<div class="right">
+  <h2>Explore</h2>
+
+  <div class="feature" onclick="location.href='todo.html'">📝 To-Do List</div>
+  <div class="feature" onclick="location.href='tribute.html'">🎖 Tribute Page</div>
+  <div class="feature" onclick="location.href='calculator.html'">🧮 Calculator</div>
+</div>
+
+<script>
+function togglePassword(){
+  let p = document.getElementById("pass");
+  p.type = (p.type === "password") ? "text" : "password";
+}
+
+function register(){
+  let u = user.value.trim();
+  let p = pass.value.trim();
+  let msg = document.getElementById("msg");
+
+  if(u==="" || p===""){
+    msg.innerText="⚠️ Fill all fields";
+    msg.style.color="red";
+    return;
+  }
+
+  let users = JSON.parse(localStorage.getItem("users")) || {};
+
+  if(users[u]){
+    msg.innerText="⚠️ Account already exists";
+    msg.style.color="orange";
+  }else{
+    users[u]=p;
+    localStorage.setItem("users",JSON.stringify(users));
+    msg.innerText="✅ Registered successfully";
+    msg.style.color="green";
+  }
+}
+
+function login(){
+  let u = user.value.trim();
+  let p = pass.value.trim();
+  let msg = document.getElementById("msg");
+
+  let users = JSON.parse(localStorage.getItem("users")) || {};
+
+  if(users[u] && users[u]===p){
+    msg.innerText="✅ Login successful";
+    msg.style.color="green";
+
+    setTimeout(()=>{
+      window.location.href="todo.html";
+    },1000);
+  }else{
+    msg.innerText="❌ Invalid username or password";
+    msg.style.color="red";
+  }
+}
+</script>
+
+</body>
+</html>

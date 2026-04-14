@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Calculator</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  font-family:Arial;
+
+  background:url('calculator.jpg');
+  background-size:cover;
+  background-position:center;
+}
+
+/* POSITION (UPDATED) */
+.calc{
+  position:absolute;
+  top:90px;   /* moved slightly up */
+  left:80px;  /* moved slightly right */
+
+  width:260px;
+  padding:20px;
+  border-radius:20px;
+  background:transparent;
+  text-align:center;
+}
+
+h2{
+  margin-bottom:15px;
+}
+
+/* DISPLAY */
+input{
+  width:100%;
+  height:50px;
+  margin-bottom:15px;
+  border-radius:15px;
+  border:2px solid black;
+  text-align:right;
+  font-size:18px;
+  padding:5px;
+  background:transparent;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+/* BUTTON */
+button{
+  padding:15px;
+  border-radius:12px;
+  border:2px solid black;
+  background:transparent;
+  font-size:16px;
+  cursor:pointer;
+}
+
+/* BACK BUTTON */
+.back-btn{
+  position:absolute;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  padding:10px 20px;
+  border:none;
+  background:black;
+  color:white;
+  border-radius:10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="calc">
+
+<h2>Calculator</h2>
+
+<input id="display">
+
+<div class="grid">
+
+<!-- ROW 1 -->
+<button onclick="clearDisplay()">C</button>
+<button onclick="erase()">⌫</button>
+<button onclick="press('%')">%</button>
+<button onclick="press('/')">÷</button>
+
+<!-- ROW 2 -->
+<button onclick="press('7')">7</button>
+<button onclick="press('8')">8</button>
+<button onclick="press('9')">9</button>
+<button onclick="press('*')">×</button>
+
+<!-- ROW 3 -->
+<button onclick="press('4')">4</button>
+<button onclick="press('5')">5</button>
+<button onclick="press('6')">6</button>
+<button onclick="press('-')">−</button>
+
+<!-- ROW 4 -->
+<button onclick="press('1')">1</button>
+<button onclick="press('2')">2</button>
+<button onclick="press('3')">3</button>
+<button onclick="press('+')">+</button>
+
+<!-- ROW 5 -->
+<button onclick="press('0')">0</button>
+<button onclick="press('.')">.</button>
+<button onclick="calculate()">=</button>
+
+</div>
+
+</div>
+
+<button class="back-btn" onclick="history.back()">⬅ Back</button>
+
+<script>
+function press(v){
+  display.value += v;
+}
+
+function calculate(){
+  try{
+    display.value = eval(display.value);
+  }catch{
+    display.value = "Error";
+  }
+}
+
+function clearDisplay(){
+  display.value = "";
+}
+
+function erase(){
+  display.value = display.value.slice(0, -1);
+}
+</script>
+
+</body>
+</html>

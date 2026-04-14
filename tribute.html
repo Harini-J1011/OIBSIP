@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tribute</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+
+  background:url('tribute.jpg');
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+
+/* MAIN LAYOUT */
+.container{
+  display:flex;
+  min-height:100vh;
+  padding:40px;
+  background:transparent; /* fully transparent */
+}
+
+/* LEFT SIDE */
+.left{
+  width:55%;
+  padding:20px;
+}
+
+/* CENTERED NAME */
+h1{
+  text-align:center;
+  margin-bottom:20px;
+  color:black;
+}
+
+/* RIGHT SIDE */
+.right{
+  width:45%;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding-top:80px;
+}
+
+/* IMAGE */
+.right img{
+  width:450px;
+  border-radius:10px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.3);
+}
+
+/* TEXT */
+p{
+  line-height:1.7;
+  margin-bottom:15px;
+  font-size:16px;
+  color:black;
+}
+
+/* QUOTE */
+.quote{
+  text-align:center;
+  margin:20px;
+  font-style:italic;
+  font-size:18px;
+  color:black;
+}
+
+/* BACK BUTTON */
+.back-btn{
+  display:block;
+  margin:20px auto;
+  padding:10px 20px;
+  background:black;
+  color:white;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- LEFT -->
+<div class="left">
+  <h1>Dr. A.P.J. Abdul Kalam</h1>
+
+  <p>
+  Dr. A.P.J. Abdul Kalam was born on October 15, 1931, in Rameswaram, Tamil Nadu, into a humble family. Despite financial challenges, he was a bright and hardworking student. His early life was shaped by discipline, determination, and a strong desire to learn and succeed.
+  </p>
+
+  <p>
+  He studied physics at St. Joseph’s College and later pursued aerospace engineering at the Madras Institute of Technology. His education played a crucial role in building his career in science, especially in aviation and space technology.
+  </p>
+
+  <p>
+  Kalam worked with major organizations like ISRO and DRDO, contributing significantly to India’s missile and space programs. He led projects like SLV-III and helped develop Agni and Prithvi missiles, earning him the title “Missile Man of India.”
+  </p>
+
+  <p>
+  He received many prestigious awards including the Bharat Ratna. He served as the 11th President of India and was loved by people for his simplicity and inspirational personality. He dedicated his life to teaching and motivating young minds to dream big.
+  </p>
+
+  <p>
+  Apart from his scientific achievements, Dr. Kalam was a great author and wrote several inspirational books like "Wings of Fire" and "Ignited Minds." His writings encouraged youth to believe in themselves and contribute to the nation’s growth.
+  </p>
+
+  <p>
+  Even after his presidency, he continued to interact with students and share his vision for a developed India. His life remains a powerful example of how dedication, humility, and hard work can lead to greatness.
+  </p>
+
+</div>
+
+<!-- RIGHT -->
+<div class="right">
+  <img src="Dr-APJ-Abdul-Kalam-photo.webp" alt="APJ Abdul Kalam">
+</div>
+
+</div>
+
+<!-- QUOTE -->
+<div class="quote">
+  "Dream, dream, dream. Dreams transform into thoughts and thoughts result in action."
+</div>
+
+<button class="back-btn" onclick="history.back()">⬅ Back</button>
+
+</body>
+</html>

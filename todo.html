@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>To-Do</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial;
+}
+
+/* BACKGROUND */
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:url('todo list.jpg');
+  background-size:cover;
+  background-position:center;
+}
+
+/* CONTAINER */
+.todo-box{
+  background:transparent;
+  padding:30px;
+  width:420px;
+  border-radius:15px;
+  color:black;
+}
+
+h2{
+  margin-bottom:20px;
+}
+
+/* INPUT */
+.input-row{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.input-row input{
+  flex:1;
+  padding:10px;
+  border-radius:5px;
+  border:none;
+  background:rgba(255,255,255,0.6);
+}
+
+.input-row button{
+  padding:10px 15px;
+  background:#007BFF;
+  color:white;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+/* TASK */
+.task{
+  background:rgba(255,255,255,0.4);
+  margin:8px 0;
+  padding:10px;
+  border-radius:8px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+/* COMPLETED STYLE */
+.completed span{
+  text-decoration: line-through;
+  color: gray;
+}
+
+/* DATE */
+.time{
+  font-size:11px;
+  color:#333;
+}
+
+/* BUTTONS */
+.actions button{
+  margin-left:5px;
+  padding:5px 8px;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+  font-size:12px;
+}
+
+.complete-btn{background:#4CAF50;color:white;}
+.edit-btn{background:#2196F3;color:white;}
+.delete-btn{background:#f44336;color:white;}
+
+.back-btn{
+  margin-top:15px;
+  width:100%;
+  padding:10px;
+  background:#333;
+  color:white;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="todo-box">
+
+<h2>To-Do App</h2>
+
+<div class="input-row">
+<input id="taskInput" placeholder="Enter task">
+<button onclick="addTask()">Add Task</button>
+</div>
+
+<h3>Pending Tasks</h3>
+<div id="pending"></div>
+
+<h3>Completed Tasks</h3>
+<div id="completed"></div>
+
+<button class="back-btn" onclick="history.back()">⬅ Back</button>
+
+</div>
+
+<script>
+
+// LOAD DATA
+window.onload = function(){
+  loadTasks();
+};
+
+// ADD TASK
+function addTask(){
+  let val = taskInput.value.trim();
+  if(val==="") return;
+
+  let time = new Date().toLocaleString();
+
+  let task = {
+    text: val,
+    time: time,
+    completed: false
+  };
+
+  saveTask(task);
+  renderTask(task);
+
+  taskInput.value="";
+}
+
+// CREATE UI
+function renderTask(task){
+  let div = document.createElement("div");
+  div.className = "task";
+
+  if(task.completed){
+    div.classList.add("completed");
+  }
+
+  div.innerHTML = `
+  <div>
+    <span>${task.text}</span>
+    <div class="time">${task.time}</div>
+  </div>
+
+  <div class="actions">
+    <button class="complete-btn" onclick="complete(this)">Complete</button>
+    <button class="edit-btn" onclick="edit(this)">Edit</button>
+    <button class="delete-btn" onclick="del(this)">Delete</button>
+  </div>`;
+
+  if(task.completed){
+    completed.appendChild(div);
+  }else{
+    pending.appendChild(div);
+  }
+}
+
+// COMPLETE TASK
+function complete(btn){
+  let taskDiv = btn.parentElement.parentElement;
+  taskDiv.classList.add("completed");
+  completed.appendChild(taskDiv);
+  updateStorage();
+}
+
+// DELETE
+function del(btn){
+  btn.parentElement.parentElement.remove();
+  updateStorage();
+}
+
+// EDIT
+function edit(btn){
+  let t = btn.parentElement.parentElement.querySelector("span");
+  let newTask = prompt("Edit task", t.innerText);
+  if(newTask){
+    t.innerText = newTask;
+    updateStorage();
+  }
+}
+
+// STORAGE FUNCTIONS
+function saveTask(task){
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  tasks.push(task);
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function updateStorage(){
+  let allTasks = [];
+
+  document.querySelectorAll(".task").forEach(div=>{
+    let text = div.querySelector("span").innerText;
+    let time = div.querySelector(".time").innerText;
+    let completed = div.classList.contains("completed");
+
+    allTasks.push({text, time, completed});
+  });
+
+  localStorage.setItem("tasks", JSON.stringify(allTasks));
+}
+
+// LOAD TASKS
+function loadTasks(){
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  tasks.forEach(t => renderTask(t));
+}
+
+</script>
+
+</body>
+</html>

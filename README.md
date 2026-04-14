@@ -2,7 +2,6 @@
 ✨ Completed as part of my internship at **Oasis Infobyte**
 ## Project Overview
 This is a **multi-functional web application** designed to showcase my frontend development skills by building interactive and user-friendly features.
-
 ## Features
 **Login Authentication System**  
 - User registration & login validation  
@@ -17,22 +16,16 @@ This is a **multi-functional web application** designed to showcase my frontend 
 **Tribute Page**  
 - Dedicated page to admire a personality  
 - Clean and elegant design  
-**Internship Flow Section**  
-- Visual representation of internship steps  
-- Improves user understanding  
-
 ## Technologies Used
 -HTML
 -CSS
 -JavaScript  
-
 ##  What I Learned
 - DOM Manipulation  
 - Event Handling  
 - UI/UX Design Basics  
 - Building interactive web applications  
 - Problem-solving skills  
-
 ## Project Preview
 Screenshots and demo video are shared on my LinkedIn profile.
 ## Acknowledgement
